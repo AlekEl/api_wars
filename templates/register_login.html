@@ -1,0 +1,38 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}SWAPI{% endblock %}
+
+{% block navbar %}
+{{nav.mynavbar.render()}}
+{% endblock %}
+
+{% block content %}
+    <div class="container register-div">
+      {% if type == "register" %}
+        <h1>Register User</h1>
+        <form action="{{ url_for('register') }}" method="POST">
+      {% elif type == "login" %}
+          <form action="{{ url_for('login') }}" method="POST">
+        <h1>Login</h1>
+      {% endif %}
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+          </div>
+            <button class="btn-lg" type="submit">Submit</button>
+        </form>
+      <h2>{{ message }}</h2>
+    </div>
+{% endblock %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='style.css')}}">
+{% endblock %}
+{% block scripts %}
+<script src="{{url_for('.static', filename='script.js')}}"></script>
+{{super()}}
+{% endblock %}
